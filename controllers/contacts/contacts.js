@@ -1,0 +1,81 @@
+const contactsOperations = require("../../models/contacts");
+const { HttpError, ctrlWrapper } = require("../../helpers");
+
+const getAllContacts = async (req, res, next) => {
+  const contacts = await contactsOperations.listContacts();
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    data: {
+      result: contacts,
+    },
+  });
+};
+
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+
+  const result = await contactsOperations.getContactById(id);
+
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    data: {
+      result,
+    },
+  });
+};
+
+const addContact = async (req, res, next) => {
+  const result = await contactsOperations.addContact(req.body);
+
+  res.status(201).json({
+    status: "success",
+    code: 201,
+    message: "Contact added successfully",
+    data: {
+      result,
+    },
+  });
+};
+
+const updateContact = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await contactsOperations.updateContact(id, req.body);
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    message: "Contact updated successfully",
+    data: {
+      result,
+    },
+  });
+};
+
+const deleteContact = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await contactsOperations.removeContact(id);
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    message: "Contact deleted successfully",
+    data: result,
+  });
+};
+
+module.exports = {
+  getAllContacts: ctrlWrapper(getAllContacts),
+  getById: ctrlWrapper(getById),
+  addContact: ctrlWrapper(addContact),
+  updateContact: ctrlWrapper(updateContact),
+  deleteContact: ctrlWrapper(deleteContact),
+};
