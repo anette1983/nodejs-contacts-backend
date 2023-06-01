@@ -10,17 +10,17 @@ const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Set name for contact"],
     },
     email: {
       type: String,
       match: emailRegexp,
-      required: true,
+      required: [true, "Set email for contact"],
     },
     phone: {
       type: String,
       match: phoneRegexp,
-      required: true,
+      required: [true, "Set phone for contact"],
     },
     favorite: {
       type: Boolean,
@@ -29,7 +29,7 @@ const contactSchema = new Schema(
   },
   {
     versionKey: false,
-    timestamps: true,
+    // timestamps: true,
   }
 );
 
@@ -43,16 +43,26 @@ const addSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required().messages({
     "any.required": `missing required "email" field`,
     "string.empty": `"email" cannot be an empty field`,
+    "string.pattern.base": `"email" must be a valid email address`,
   }),
   phone: Joi.string().pattern(phoneRegexp).required().messages({
     "any.required": `missing required "phone" field`,
     "string.empty": `"phone" cannot be an empty field`,
+    "string.pattern.base": `"phone" must be a 10-digit number in the following format: (XXX) XXX-XXXX`,
   }),
   favorite: Joi.boolean(),
 });
 
+const updateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required().messages({
+    "any.required": `missing field "favorite"`,
+    "string.empty": `"favorite" cannot be an empty field`,
+  }),
+});
+
 const schemas = {
   addSchema,
+  updateFavoriteSchema,
 };
 
 const Contact = model("contact", contactSchema);
