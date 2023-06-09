@@ -4,6 +4,7 @@ const Joi = require("joi");
 const { handleMongooseError } = require("../helpers");
 
 const emailRegexp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+const subscriptionList = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
@@ -18,12 +19,15 @@ const userSchema = new Schema(
       minlength: 6,
       required: [true, "Set password for user"],
     },
-    // subscription: {
-    //   type: String,
-    //   enum: ["starter", "pro", "business"],
-    //   default: "starter",
-    // },
-    // token: String,
+    subscription: {
+      type: String,
+      enum: subscriptionList,
+      default: "starter",
+    },
+    token: {
+      type: String,
+      default: "",
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -37,7 +41,7 @@ const registerSchema = Joi.object({
     "string.pattern.base": `"email" must be a valid email address`,
   }),
   password: Joi.string().min(6).required().messages({
-    "any.required": `missing field "password"`,
+    "any.required": `missing required "password" field`,
     "string.min": `"password" should have a minimum length of {#limit}`,
     "string.empty": `"password" cannot be an empty field`,
   }),
@@ -50,15 +54,24 @@ const loginSchema = Joi.object({
     "string.pattern.base": `"email" must be a valid email address`,
   }),
   password: Joi.string().min(6).required().messages({
-    "any.required": `missing field "password"`,
+    "any.required": `missing required "password" field`,
     "string.min": `"password" should have a minimum length of {#limit}`,
     "string.empty": `"password" cannot be an empty field`,
   }),
 });
 
+const subscriptionSchema = Joi.object({
+  subscription: Joi.string()
+    .valid(...subscriptionList)
+    .messages({
+      "any.invalid": "Ivalid subscription",
+    }),
+});
+
 const schemas = {
   registerSchema,
   loginSchema,
+  subscriptionSchema,
 };
 
 const User = model("user", userSchema);
