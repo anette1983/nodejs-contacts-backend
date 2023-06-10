@@ -64,7 +64,7 @@ const subscriptionSchema = Joi.object({
   subscription: Joi.string()
     .valid(...subscriptionList)
     .messages({
-      "any.invalid": "Ivalid subscription",
+      "any.only": "Ivalid subscription",
     }),
 });
 
