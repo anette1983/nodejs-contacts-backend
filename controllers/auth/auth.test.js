@@ -42,6 +42,8 @@ describe("test login route", () => {
     expect(body).toHaveProperty("token");
     expect(body.user.email).toBe(email);
     expect(body.user.subscription).toBe("starter");
+    expect(typeof body.user.subscription).toBe("string");
+    expect(typeof body.user.email).toBe("string");
 
     const { token } = body;
     const decoded = jwt.verify(token, SECRET_KEY);
