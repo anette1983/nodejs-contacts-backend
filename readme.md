@@ -11,7 +11,7 @@
 
 This is a Node.js REST API application developed using various technologies and packages, including Node.js, the Express framework, Joi, Mongoose, Morgan, Docker, nodemon, Cors, Cross-env, Dotenv, Sendgrid, Gravatar, Bcrypt, Jsonwebtoken, Multer, and Jest. It's a fully functioning API server that runs on Node.js and is connected to an active MongoDB database.
 
-The server manages collections of contacts and users, providing authentication/authorization, email verification, and the ability to work with images. Each user can access and manage only their own contacts. Additionally, the application offers pagination for the contacts collection (GET /contacts?page=1&limit=20), allows contact filtering by the 'favorite' field (GET /contacts?favorite=true), and includes Jest unit tests for the authentication controllers (login/signin).
+The server manages collections of contacts and users, providing authentication/authorization, email verification, and the ability to work with images. Each user can access and manage only their own contacts. Additionally, the application offers pagination for the contacts collection (GET /contacts?page=1&limit=20), allows contact filtering by the 'favorite' field (GET /contacts?favorite=true), and includes Jest unit tests for the authentication controllers (login/register).
 
 ## Usage
 
