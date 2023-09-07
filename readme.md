@@ -18,7 +18,6 @@ The server manages collections of contacts and users, providing authentication/a
 This project is available at https://db-contacts-backend-owx0.onrender.com
 To test the CRUD operations, please use "Postman" application or similar.
 
-- [App demo video](https://drive.google.com/file/d/11IPPkXVVzY5j6PmCpNDPXKaKiR2X3rdi/view?usp=sharing)
 
 ## Installation
 
@@ -27,13 +26,13 @@ To use this project locally, please follow these steps:
 **Step 1: Clone the Repository**
 
 ```
-git clone https://github.com/anette1983/test-task-backend.git
+git clone https://github.com/anette1983/nodejs-contacts-backend.git
 ```
 
 **Step 2: Navigate to the project's directory**
 
 ```
-cd test-task-backend
+cd nodejs-contacts-backend
 ```
 
 **Step 3. Install the project dependencies using npm:**
@@ -82,4 +81,5 @@ Example: `GET /contacts?favorite=true`
 
 
 
-Thank you for your interest in this project! If you have any questions or need further assistance, please feel free to contact me.
+Thank you for your interest in this project! If you have any questions or need further assistance, please feel free to contact me:
+<a href="https://www.linkedin.com/in/hanna-konchakovska/"><img align="left" src="https://raw.githubusercontent.com/yushi1007/yushi1007/main/images/linkedin.svg" alt="Hanna | LinkedIn" width="21px"/></a>
